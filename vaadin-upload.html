@@ -169,7 +169,7 @@ Custom property | Description | Default
     <slot name="file-list">
       <div id="fileList">
         <template is="dom-repeat" items="[[files]]" as="file">
-          <vaadin-upload-file file="[[file]]"></vaadin-upload-file>
+          <vaadin-upload-file show-start="[[showStartIcon]]" file="[[file]]"></vaadin-upload-file>
         </template>
       </div>
     </slot>
