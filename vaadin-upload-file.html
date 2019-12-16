@@ -230,7 +230,7 @@ Custom property | Description | Default
       </div>
 
       <div id="commands">
-        <paper-icon-button icon="vaadin-upload:start" file-event="file-start" on-tap="_fireFileEvent" hidden$="[[!file.held]]"></paper-icon-button>
+        <paper-icon-button icon="vaadin-upload:start" file-event="file-start" on-tap="_fireFileEvent" hidden$="[[_isHidden(file.held)]]"></paper-icon-button>
         <paper-icon-button icon="vaadin-upload:refresh" file-event="file-retry" on-tap="_fireFileEvent" hidden$="[[!file.error]]"></paper-icon-button>
         <paper-icon-button icon="vaadin-upload:clear" file-event="file-abort" on-tap="_fireFileEvent"></paper-icon-button>
       </div>
@@ -260,7 +260,8 @@ Custom property | Description | Default
       /**
        * File metadata, upload status and progress information.
        */
-      file: Object
+      file: Object,
+      showStart: Boolean
     },
 
     observers: [
@@ -270,6 +271,13 @@ Custom property | Description | Default
 
     _fileChanged: function() {
       this.$.progress.updateStyles();
+    },
+
+    _isHidden(value){
+      if (this.startIcon && value ){
+        return  false
+      }
+      return true
     },
 
     ready: function() {
